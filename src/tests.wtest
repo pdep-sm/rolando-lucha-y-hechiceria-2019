@@ -1,0 +1,7 @@
+import modelo.*
+
+test "testX" {
+
+	assert.that(true)
+
+}
