@@ -1,7 +1,44 @@
 import modelo.*
 
-test "testX" {
+test "Nivel de hechiceria de Rolando" {
+	rolando.hechizoPreferido(espectroMalefico)
+	assert.equals(56, rolando.nivelHechiceria())
+}
 
-	assert.that(true)
+test "Nivel de hechiceria de Rolando tras cambiar nombre al hechizo" {
+	rolando.hechizoPreferido(espectroMalefico)
+	espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+	assert.equals(125, rolando.nivelHechiceria())
+}
 
+test "Nivel de hechiceria de Rolando con hechizo básico" {
+	rolando.hechizoPreferido(hechizoBasico)
+	assert.equals(35, rolando.nivelHechiceria())
+}
+
+test "Nivel de hechiceria de Rolando tras eclipse" {
+	rolando.hechizoPreferido(espectroMalefico)
+	fuerzaOscura.eclipsar()
+	assert.equals(61, rolando.nivelHechiceria())
+}
+
+test "Espectro maléfico es poderoso" {
+	assert.that(espectroMalefico.esPoderoso())
+}
+
+test "Espectro maléfico de nombre pepe no es poderoso" {
+	espectroMalefico.nombre("pepe")
+	assert.notThat(espectroMalefico.esPoderoso())
+}
+
+test "Hechizo básico no es poderoso" {
+	assert.notThat(hechizoBasico.esPoderoso())
+}
+
+test "Valor de lucha de Rolando sin artefactos" {
+/* 	rolando.quitar(espadaDelDestino)
+ *	rolando.quitar(collarDivino)
+ *	rolando.quitar(mascaraOscura)
+ *	assert.equals(1, rolando.poderDeLucha())
+ */
 }
