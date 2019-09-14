@@ -1,44 +1,78 @@
 import modelo.*
 
-test "Nivel de hechicería de Rolando" {
-	rolando.hechizoPreferido(espectroMalefico)
-	assert.equals(56, rolando.nivelHechiceria())
-}
+describe "Entrega 1" {
+	
+	fixture {
+	 	rolando.agregar(espadaDelDestino)
+		rolando.agregar(collarDivino)
+		rolando.agregar(mascaraOscura)
+		collarDivino.cantidadPerlas(5)
+	}
 
-test "Nivel de hechicería de Rolando tras cambiar nombre al hechizo" {
-	rolando.hechizoPreferido(espectroMalefico)
-	espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
-	assert.equals(125, rolando.nivelHechiceria())
-}
-
-test "Nivel de hechicería de Rolando con hechizo básico" {
-	rolando.hechizoPreferido(hechizoBasico)
-	assert.equals(35, rolando.nivelHechiceria())
-}
-
-test "Nivel de hechicería de Rolando tras eclipse" {
-	rolando.hechizoPreferido(espectroMalefico)
-	fuerzaOscura.eclipsar()
-	assert.equals(61, rolando.nivelHechiceria())
-}
-
-test "Espectro maléfico es poderoso" {
-	assert.that(espectroMalefico.esPoderoso())
-}
-
-test "Espectro maléfico de nombre pepe no es poderoso" {
-	espectroMalefico.nombre("pepe")
-	assert.notThat(espectroMalefico.esPoderoso())
-}
-
-test "Hechizo básico no es poderoso" {
-	assert.notThat(hechizoBasico.esPoderoso())
-}
-
-test "Valor de lucha de Rolando sin artefactos" {
-/* 	rolando.quitar(espadaDelDestino)
- *	rolando.quitar(collarDivino)
- *	rolando.quitar(mascaraOscura)
- *	assert.equals(1, rolando.poderDeLucha())
- */
+	test "Nivel de hechicería de Rolando" {
+		rolando.hechizoPreferido(espectroMalefico)
+		assert.equals(56, rolando.nivelHechiceria())
+	}
+	
+	test "Nivel de hechicería de Rolando tras cambiar nombre al hechizo" {
+		rolando.hechizoPreferido(espectroMalefico)
+		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+		assert.equals(125, rolando.nivelHechiceria())
+	}
+	
+	test "Nivel de hechicería de Rolando con hechizo básico" {
+		rolando.hechizoPreferido(hechizoBasico)
+		assert.equals(35, rolando.nivelHechiceria())
+	}
+	
+	test "Nivel de hechicería de Rolando tras eclipse" {
+		rolando.hechizoPreferido(espectroMalefico)
+		fuerzaOscura.eclipsar()
+		assert.equals(61, rolando.nivelHechiceria())
+	}
+	
+	test "Espectro maléfico es poderoso" {
+		assert.that(espectroMalefico.esPoderoso())
+	}
+	
+	test "Espectro maléfico de nombre pepe no es poderoso" {
+		espectroMalefico.nombre("pepe")
+		assert.notThat(espectroMalefico.esPoderoso())
+	}
+	
+	test "Hechizo básico no es poderoso" {
+		assert.notThat(hechizoBasico.esPoderoso())
+	}
+	
+	test "Valor de lucha de Rolando sin artefactos" {
+	 	rolando.quitar(espadaDelDestino)
+		rolando.quitar(collarDivino)
+		rolando.quitar(mascaraOscura)
+		assert.equals(1, rolando.habilidadLucha())
+	}
+	
+	test "Valor de lucha de Rolando con artefactos" {
+		assert.equals(13, rolando.habilidadLucha())
+	}
+	
+	test "Valor de lucha de Rolando con artefactos y collar con 3 perlas" {
+		collarDivino.cantidadPerlas(3)
+		assert.equals(11, rolando.habilidadLucha())
+	}
+	
+	test "Valor de lucha de Rolando con artefactos y base lucha 8" {
+		rolando.valorBaseLucha(8)
+		assert.equals(20, rolando.habilidadLucha())
+	}
+	
+	test "Valor lucha máscara oscura tras eclipse" {
+		fuerzaOscura.eclipsar()
+		assert.equals(5, mascaraOscura.habilidadLucha())
+	}
+	
+	test "Valor de lucha de Rolando sin máscara oscura" {
+		rolando.quitar(mascaraOscura)
+		assert.equals(9, rolando.habilidadLucha())
+	}
+	
 }

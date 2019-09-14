@@ -1,7 +1,8 @@
 object rolando {
 	var hechizoPreferido
 	var valorBaseHechiceria = 3
-	var valorBaseLucha = 1
+	var property valorBaseLucha = 1
+	const artefactos = #{}
 	
 	method hechizoPreferido(unHechizo) {
 		hechizoPreferido = unHechizo
@@ -10,9 +11,17 @@ object rolando {
 		valorBaseHechiceria * hechizoPreferido.poder() + fuerzaOscura.valor()
 	method seCreePoderoso() = 
 		hechizoPreferido.esPoderoso()
-	method valorBaseLucha(valor) {
-		valorBaseLucha = valor
+	method habilidadLucha() =
+		valorBaseLucha + 
+		artefactos.map({artefacto => artefacto.habilidadLucha()}).sum()
+	method agregar(artefacto) {
+		artefactos.add(artefacto)
 	}
+	method quitar(artefacto) {
+		artefactos.remove(artefacto)
+	}
+	method masLuchadorQueHechicero() = 
+		self.habilidadLucha() > self.nivelHechiceria()
 }
 
 object fuerzaOscura {
@@ -40,4 +49,21 @@ object espectroMalefico {
 object hechizoBasico {
 	method poder() = 10
 	method esPoderoso() = false
+}
+
+object espadaDelDestino {
+	method habilidadLucha() = 3
+}
+
+object collarDivino {
+	var property cantidadPerlas
+	
+	method habilidadLucha() = cantidadPerlas
+}
+
+object mascaraOscura {
+	const habilidadLuchaMinima = 4
+	
+	method habilidadLucha() = 
+		habilidadLuchaMinima.max(fuerzaOscura.valor() / 2)
 }
