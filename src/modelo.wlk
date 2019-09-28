@@ -71,7 +71,7 @@ object hechizoBasico {
 	method valorDeRefuerzo(guerrero) = self.poder()
 }
 
-object espadaDelDestino {
+class Arma {
 	method habilidadLucha(guerrero) = 3
 }
 
@@ -81,11 +81,12 @@ object collarDivino {
 	method habilidadLucha(guerrero) = cantidadPerlas
 }
 
-object mascaraOscura {
-	const habilidadLuchaMinima = 4
+class Mascara {
+	var property habilidadLuchaMinima = 4
+	var property indiceDeOscuridad 
 	
 	method habilidadLucha(guerrero) = 
-		habilidadLuchaMinima.max(fuerzaOscura.valor() / 2)
+		habilidadLuchaMinima.max(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
 }
 
 

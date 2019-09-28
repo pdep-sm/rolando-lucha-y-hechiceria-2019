@@ -4,10 +4,14 @@ describe "Entrega 1" {
 	
 	const rolando = new Guerrero()
 	const espectroMalefico = new HechizoDeLogo()
+	const espadaDelDestino = new Arma()
+	const mascaraOscura = new Mascara()
 	
 	fixture {
 		espectroMalefico.nombre("Espectro maléfico")
 		espectroMalefico.multiplicador(1)
+		
+		mascaraOscura.indiceDeOscuridad(1)
 		
 	 	rolando.agregar(espadaDelDestino)
 		rolando.agregar(collarDivino)
