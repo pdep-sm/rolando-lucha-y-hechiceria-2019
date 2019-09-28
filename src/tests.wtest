@@ -2,7 +2,13 @@ import modelo.*
 
 describe "Entrega 1" {
 	
+	const rolando = new Guerrero()
+	const espectroMalefico = new HechizoDeLogo()
+	
 	fixture {
+		espectroMalefico.nombre("Espectro maléfico")
+		espectroMalefico.multiplicador(1)
+		
 	 	rolando.agregar(espadaDelDestino)
 		rolando.agregar(collarDivino)
 		rolando.agregar(mascaraOscura)
@@ -70,7 +76,7 @@ describe "Entrega 1" {
 	
 	test "Valor lucha máscara oscura tras eclipse" {
 		fuerzaOscura.eclipsar()
-		assert.equals(5, mascaraOscura.habilidadLucha())
+		assert.equals(5, mascaraOscura.habilidadLucha(rolando))
 	}
 	
 	test "Valor de lucha de Rolando sin máscara oscura" {
@@ -96,22 +102,22 @@ describe "Entrega 1" {
 	
 	test "Saber habilidad de lucha de armadura con bendición" {
 		armadura.refuerzo(bendicion)
-		assert.equals(58, armadura.habilidadLucha())
+		assert.equals(58, armadura.habilidadLucha(rolando))
 	}
 	
 	test "Saber habilidad de lucha de armadura con cota de malla" {
 		armadura.refuerzo(cotaDeMalla)
-		assert.equals(3, armadura.habilidadLucha())
+		assert.equals(3, armadura.habilidadLucha(rolando))
 	}
 	
 	test "Saber habilidad de lucha de armadura con hechizo básico" {
 		armadura.refuerzo(hechizoBasico)
-		assert.equals(12, armadura.habilidadLucha())
+		assert.equals(12, armadura.habilidadLucha(rolando))
 	}
 
 	test "Saber habilidad de lucha de armadura con espectro maléfico" {
 		armadura.refuerzo(espectroMalefico)
-		assert.equals(19, armadura.habilidadLucha())
+		assert.equals(19, armadura.habilidadLucha(rolando))
 	}
 	
 	test "Valor de lucha de Rolando sólo con espejo" {

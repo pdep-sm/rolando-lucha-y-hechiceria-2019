@@ -1,4 +1,4 @@
-object rolando {
+class Guerrero {
 	var hechizoPreferido
 	var valorBaseHechiceria = 3
 	var property valorBaseLucha = 1
@@ -16,7 +16,7 @@ object rolando {
 	
 	method habilidadLucha() =
 		valorBaseLucha + 
-		artefactos.map({artefacto => artefacto.habilidadLucha()}).sum()
+		artefactos.map({artefacto => artefacto.habilidadLucha(self)}).sum()
 	
 	method agregar(artefacto) {
 		artefactos.add(artefacto)
@@ -32,7 +32,7 @@ object rolando {
 	method habilidadMejorArtefactoSin(unArtefacto) {
 		var artefactosFiltrados = artefactos.filter({ artefacto => artefacto != unArtefacto })
 		
-		return artefactosFiltrados.map({ artefacto => artefacto.habilidadLucha() }).maxIfEmpty({0})
+		return artefactosFiltrados.map({ artefacto => artefacto.habilidadLucha(self) }).maxIfEmpty({0})
 	}
 	
 	method estaCargado() = artefactos.size() >= 5
@@ -52,18 +52,15 @@ object fuerzaOscura {
 	}
 }
 
-object espectroMalefico {
-	var nombre = "Espectro maléfico"
+class HechizoDeLogo {
+	var property nombre
+	var property multiplicador
 	
-	method nombre(unNombre) { 
-		nombre = unNombre
-	}
-	
-	method poder() = nombre.length()
+	method poder() = nombre.length() * multiplicador
 	
 	method esPoderoso() = self.poder() > 15
 	
-	method valorDeRefuerzo() = self.poder()
+	method valorDeRefuerzo(guerrero) = self.poder()
 }
 
 object hechizoBasico {
@@ -71,23 +68,23 @@ object hechizoBasico {
 	
 	method esPoderoso() = false
 	
-	method valorDeRefuerzo() = self.poder()
+	method valorDeRefuerzo(guerrero) = self.poder()
 }
 
 object espadaDelDestino {
-	method habilidadLucha() = 3
+	method habilidadLucha(guerrero) = 3
 }
 
 object collarDivino {
 	var property cantidadPerlas
 	
-	method habilidadLucha() = cantidadPerlas
+	method habilidadLucha(guerrero) = cantidadPerlas
 }
 
 object mascaraOscura {
 	const habilidadLuchaMinima = 4
 	
-	method habilidadLucha() = 
+	method habilidadLucha(guerrero) = 
 		habilidadLuchaMinima.max(fuerzaOscura.valor() / 2)
 }
 
@@ -101,24 +98,24 @@ object armadura {
 		refuerzo = unRefuerzo
 	}
 	
-	method habilidadLucha() = valorBaseLucha + refuerzo.valorDeRefuerzo()
+	method habilidadLucha(guerrero) = valorBaseLucha + refuerzo.valorDeRefuerzo(guerrero)
 }
 
 object cotaDeMalla {
-	method valorDeRefuerzo() = 1
+	method valorDeRefuerzo(guerrero) = 1
 }
 
 object bendicion {
-	method valorDeRefuerzo() = rolando.nivelHechiceria()
+	method valorDeRefuerzo(guerrero) = guerrero.nivelHechiceria()
 }
 
 object ningunRefuerzo {
-	method valorDeRefuerzo() = 0
+	method valorDeRefuerzo(guerrero) = 0
 }
 
 object espejo {
-	method habilidadLucha() {
-		return rolando.habilidadMejorArtefactoSin(self)
+	method habilidadLucha(guerrero) {
+		return guerrero.habilidadMejorArtefactoSin(self)
 	}
 }
 
