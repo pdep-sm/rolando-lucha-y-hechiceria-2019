@@ -34,6 +34,8 @@ object rolando {
 		
 		return artefactosFiltrados.map({ artefacto => artefacto.habilidadLucha() }).maxIfEmpty({0})
 	}
+	
+	method estaCargado() = artefactos.size() >= 5
 }
 
 object fuerzaOscura {
@@ -128,7 +130,10 @@ object libroDeHechizos {
 	}
 	
 	method poder() =
-		hechizos.sum({ hechizo => hechizo.poder() })
+		self.hechizosPoderosos().sum({ hechizo => hechizo.poder() })
+		
+	method hechizosPoderosos() = 
+		hechizos.filter({hechizo => hechizo.esPoderoso()})
 		
 	method esPoderoso() = 
 		hechizos.any({hechizo => hechizo.esPoderoso()})
