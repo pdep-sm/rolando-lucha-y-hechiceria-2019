@@ -7,7 +7,7 @@ describe "Entrega 1" {
 	const espadaDelDestino = new Arma()
 	const mascaraOscura = new Mascara()
 	
-	fixture {
+	fixture { 
 		espectroMalefico.nombre("Espectro maléfico")
 		espectroMalefico.multiplicador(1)
 		
@@ -139,5 +139,16 @@ describe "Entrega 1" {
 	 	libroDeHechizos.agregar(espectroMalefico)
 	 	libroDeHechizos.agregar(hechizoBasico)
 		assert.equals(56, rolando.nivelHechiceria())
+	}
+	
+	test "Valor de lucha de la mascara con indice 0" {
+		mascaraOscura.indiceDeOscuridad(0)
+		assert.equals(4, mascaraOscura.habilidadLucha(rolando))
+	}
+	
+	test "Valor de lucha de la mascara con indice 0 y minimo de 2" {
+		mascaraOscura.indiceDeOscuridad(0)
+		mascaraOscura.habilidadLuchaMinima(2)
+		assert.equals(2, mascaraOscura.habilidadLucha(rolando))
 	}
 }
